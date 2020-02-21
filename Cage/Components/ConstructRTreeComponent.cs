@@ -29,7 +29,7 @@ namespace Cage.Components
 
             var geometries = new List<GeometryBase>();
 
-            DA.GetDataList(0, geometries);
+            if (!DA.GetDataList(0, geometries)) return;
 
             // --- execute
 

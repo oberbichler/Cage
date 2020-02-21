@@ -7,16 +7,17 @@ using Cage.Parameters;
 
 namespace Cage.Components
 {
-    public class WithinBoxComponent : GH_Component
+    public class HitByRayComponent : GH_Component
     {
-        public WithinBoxComponent() : base("cage Within Box", "WithinBox", "", "Cage", "RTree")
+        public HitByRayComponent() : base("cage Hit by Ray", "HitByRay", "", "Cage", "RTree")
         {
         }
 
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddParameter(new RTreeParameter(), "RTree", "R", "", GH_ParamAccess.item);
-            pManager.AddBoxParameter("Box", "B", "", GH_ParamAccess.item);
+            pManager.AddPointParameter("Origin", "P", "", GH_ParamAccess.item);
+            pManager.AddVectorParameter("Direction", "D", "", GH_ParamAccess.item);
         }
 
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
@@ -30,16 +31,16 @@ namespace Cage.Components
             // --- input
 
             var rtree = default(RTree);
-            var box = default(Box);
+            var origin = default(Point3d);
+            var direction = default(Vector3d);
 
-            if (!DA.GetData(0, ref rtree)) return;
-            if (!DA.GetData(1, ref box)) return;
+            if (DA.GetData(0, ref rtree)) return;
+            if (DA.GetData(1, ref origin)) return;
+            if (DA.GetData(2, ref direction)) return;
 
             // --- compute
 
-            var bbox = box.BoundingBox;
-
-            var indices = rtree.WithinBox(bbox.Min, bbox.Max);
+            var indices = rtree.HitByRay(origin, direction);
 
             // --- output
 
@@ -51,6 +52,6 @@ namespace Cage.Components
 
         public override GH_Exposure Exposure => GH_Exposure.secondary;
 
-        public override Guid ComponentGuid => new Guid("{C5C23E9C-905B-4CA7-A915-87CA5B334512}");
+        public override Guid ComponentGuid => new Guid("{9E596F9E-0A08-426B-AD44-FD7B5427CF11}");
     }
 }

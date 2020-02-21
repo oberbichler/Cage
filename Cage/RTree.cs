@@ -1,7 +1,6 @@
 ﻿using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Cage
 {
@@ -9,7 +8,7 @@ namespace Cage
     {
         int m_nb_items;
         int m_node_size;
-        List<int> m_level_bounds= new List<int>();
+        List<int> m_level_bounds = new List<int>();
         Point3d m_min;
         Point3d m_max;
         int m_position;
@@ -159,7 +158,7 @@ namespace Cage
             Vector3d size = m_max - m_min;
 
             ulong[] hilbert_values = new ulong[m_nb_items];
-            
+
             for (int i = 0; i < m_nb_items; i++)
             {
                 Point3d box_min = m_boxes_min[i];
@@ -237,47 +236,71 @@ namespace Cage
             return true;
         }
 
-        public List<int> Search(BoundingBox box)
+        public List<int> Search(ICheck check, Func<int, bool> callback)
         {
             if (m_position != m_indices.Length)
                 throw new Exception("Data not yet indexed - call RTree::finish().");
 
-            int node_index = m_indices.Count() - 1;
-            int level = m_level_bounds.Count() - 1;
-            Stack<int> queue = new Stack<int>();
-            List<int> results = new List<int>();
+            var node_index = m_indices.Length - 1;
+            var level = m_level_bounds.Count - 1;
+            var queue = new Queue<int>();
+            var results = new List<int>();
 
-            while (node_index > -1) {
-                int end = Math.Min(node_index + m_node_size, m_level_bounds[level]);
+            while (node_index > -1)
+            {
+                var end = Math.Min(node_index + m_node_size, m_level_bounds[level]);
 
-                for (int pos = node_index; pos<end; pos++) {
+                for (var pos = node_index; pos < end; pos++)
+                {
                     int index = m_indices[pos];
 
-                    Point3d node_min = m_boxes_min[pos];
-                    Point3d node_max = m_boxes_max[pos];
+                    var node_min = m_boxes_min[pos];
+                    var node_max = m_boxes_max[pos];
 
-                    if (!Check(box.Min, box.Max, node_min, node_max)) {
+                    if (!check.Check(node_min, node_max))
+                    {
                         continue;
                     }
 
-                    if (node_index<m_nb_items) {
+                    if (node_index < m_nb_items)
+                    {
+                        if (callback == null || callback(index))
+                        {
                             results.Add(index);
-                    } else {
-                        queue.Push(index);
-                        queue.Push(level - 1);
+                        }
+                    }
+                    else
+                    {
+                        queue.Enqueue(index);
+                        queue.Enqueue(level - 1);
                     }
                 }
 
-                if (queue.Count == 0) {
+                if (queue.Count == 0)
+                {
                     node_index = -1;
                     level = -1;
-                } else {
-                    level = queue.Pop();
-                    node_index = queue.Pop();
+                }
+                else
+                {
+                    level = queue.Dequeue();
+                    node_index = queue.Dequeue();
                 }
             }
 
             return results;
+        }
+
+        public List<int> WithinBox(Point3d box_a, Point3d box_b, Func<int, bool> callback = null)
+        {
+            var check = new WithinBox(Dimension, box_a, box_b);
+            return Search(check, callback);
+        }
+
+        public List<int> HitByRay(Point3d origin, Vector3d direction, Func<int, bool> callback = null)
+        {
+            var check = new HitByRay(Dimension, origin, direction);
+            return Search(check, callback);
         }
     }
 }

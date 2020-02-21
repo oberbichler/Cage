@@ -28,8 +28,8 @@ namespace Cage.Components
             var m = default(int);
             var i = default(int);
 
-            DA.GetData(0, ref m);
-            DA.GetData(1, ref i);
+            if (DA.GetData(0, ref m)) return;
+            if (DA.GetData(1, ref i)) return;
 
             var hilbert = new HilbertCurve(2);
 

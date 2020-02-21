@@ -58,15 +58,19 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\HitByRayComponent.cs" />
     <Compile Include="Components\WithinBoxComponent.cs" />
     <Compile Include="Components\ConstructRTreeComponent.cs" />
     <Compile Include="Components\HilbertCurveComponent.cs" />
     <Compile Include="HilbertCurve.cs" />
+    <Compile Include="HitByRay.cs" />
+    <Compile Include="ICheck.cs" />
     <Compile Include="Info.cs" />
     <Compile Include="Parameters\RTreeParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RTree.cs" />
     <Compile Include="Types\GH_RTree.cs" />
+    <Compile Include="WithinBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
