@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\HitByRayComponent.cs" />
+    <Compile Include="Components\AtPointComponent.cs" />
     <Compile Include="Components\WithinBoxComponent.cs" />
     <Compile Include="Components\ConstructRTreeComponent.cs" />
     <Compile Include="Components\HilbertCurveComponent.cs" />
