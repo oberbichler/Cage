@@ -52,7 +52,7 @@ namespace Cage.Components
             DA.SetDataList(1, indices);
         }
 
-        protected override Bitmap Icon => null;
+        protected override Bitmap Icon => Properties.Resources.cage_bypoint;
 
         public override GH_Exposure Exposure => GH_Exposure.secondary;
 
