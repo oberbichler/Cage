@@ -58,9 +58,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\HitByRayComponent.cs" />
-    <Compile Include="Components\AtPointComponent.cs" />
-    <Compile Include="Components\WithinBoxComponent.cs" />
+    <Compile Include="Components\ByRayComponent.cs" />
+    <Compile Include="Components\ByPointComponent.cs" />
+    <Compile Include="Components\ByBoxComponent.cs" />
     <Compile Include="Components\ConstructRTreeComponent.cs" />
     <Compile Include="Components\HilbertCurveComponent.cs" />
     <Compile Include="HilbertCurve.cs" />
@@ -69,12 +69,38 @@
     <Compile Include="Info.cs" />
     <Compile Include="Parameters\RTreeParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RTree.cs" />
     <Compile Include="Types\GH_RTree.cs" />
     <Compile Include="WithinBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cage_bypoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cage_byray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cage_cage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cage_hilbertcurve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cage_bybox.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
