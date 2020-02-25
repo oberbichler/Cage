@@ -49,7 +49,7 @@ namespace Cage.Components
             DA.SetData(0, rtree);
         }
 
-        protected override Bitmap Icon => null;
+        protected override Bitmap Icon => Properties.Resources.cage_cage;
 
         public override GH_Exposure Exposure => GH_Exposure.primary;
 

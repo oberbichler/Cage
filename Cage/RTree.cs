@@ -291,13 +291,13 @@ namespace Cage
             return results;
         }
 
-        public List<int> WithinBox(Point3d box_a, Point3d box_b, Func<int, bool> callback = null)
+        public List<int> FindByBox(Point3d box_a, Point3d box_b, Func<int, bool> callback = null)
         {
             var check = new WithinBox(Dimension, box_a, box_b);
             return Search(check, callback);
         }
 
-        public List<int> HitByRay(Point3d origin, Vector3d direction, Func<int, bool> callback = null)
+        public List<int> FindByRay(Point3d origin, Vector3d direction, Func<int, bool> callback = null)
         {
             var check = new HitByRay(Dimension, origin, direction);
             return Search(check, callback);

@@ -8,9 +8,9 @@ namespace Cage
     {
         public override string Name => "Cage";
 
-        public override Bitmap Icon => null;
+        public override Bitmap Icon => Properties.Resources.cage_cage;
 
-        public override string Description => "";
+        public override string Description => "A spatial static Hilbert R-Tree for Grasshopper";
 
         public override Guid Id => new Guid("c8e379c8-53bc-421d-aee5-4abd53cc177e");
 
