@@ -7,9 +7,9 @@ using Cage.Parameters;
 
 namespace Cage.Components
 {
-    public class AtPointComponent : GH_Component
+    public class ByPointComponent : GH_Component
     {
-        public AtPointComponent() : base("cage At Point", "AtPoint", "", "Cage", "RTree")
+        public ByPointComponent() : base("cage Find by Point", "ByPoint", "", "Cage", "RTree")
         {
         }
 
@@ -44,7 +44,7 @@ namespace Cage.Components
 
             var bbox = new BoundingBox(point - delta, point + delta);
 
-            var indices = rtree.WithinBox(bbox.Min, bbox.Max);
+            var indices = rtree.FindByBox(bbox.Min, bbox.Max);
 
             // --- output
 

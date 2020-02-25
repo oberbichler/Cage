@@ -7,9 +7,9 @@ using Cage.Parameters;
 
 namespace Cage.Components
 {
-    public class HitByRayComponent : GH_Component
+    public class ByRayComponent : GH_Component
     {
-        public HitByRayComponent() : base("cage Hit by Ray", "HitByRay", "", "Cage", "RTree")
+        public ByRayComponent() : base("cage Find by Ray", "ByRay", "", "Cage", "RTree")
         {
         }
 
@@ -40,7 +40,7 @@ namespace Cage.Components
 
             // --- compute
 
-            var indices = rtree.HitByRay(origin, direction);
+            var indices = rtree.FindByRay(origin, direction);
 
             // --- output
 
