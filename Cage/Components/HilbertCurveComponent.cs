@@ -40,7 +40,7 @@ namespace Cage.Components
             DA.SetData(2, p[2]);
         }
 
-        protected override Bitmap Icon => null;
+        protected override Bitmap Icon => Properties.Resources.cage_hilbertcurve;
 
         public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
